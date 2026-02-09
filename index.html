@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Be My Valentine 💕</title>
+
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .card {
+        background: white;
+        width: 90%;
+        max-width: 350px;
+        height: 260px;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        text-align: center;
+        padding: 20px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    h1 {
+        font-size: 22px;
+        margin-bottom: 30px;
+    }
+
+    button {
+        font-size: 18px;
+        padding: 12px 24px;
+        border-radius: 10px;
+        border: none;
+        cursor: pointer;
+        transition: transform 0.2s ease;
+    }
+
+    #yesBtn {
+        background-color: #ff4d6d;
+        color: white;
+    }
+
+    #noBtn {
+        background-color: #ccc;
+        color: #333;
+        position: absolute;
+        left: 60%;
+        top: 65%;
+        transform: scale(1);
+    }
+</style>
+</head>
+
+<body>
+
+<div class="card" id="card">
+    <h1>Hey Medrinah I know am in Luwingu but will you be my Valentine? 💕</h1>
+    <button id="yesBtn">Yes ❤️</button>
+    <button id="noBtn">No 💔</button>
+</div>
+
+<script>
+const noBtn = document.getElementById("noBtn");
+const card = document.getElementById("card");
+
+let scale = 1;
+
+// Function to move & shrink NO
+function escape(x, y) {
+    const btnRect = noBtn.getBoundingClientRect();
+    const btnCenterX = btnRect.left + btnRect.width / 2;
+    const btnCenterY = btnRect.top + btnRect.height / 2;
+
+    const distance = Math.hypot(x - btnCenterX, y - btnCenterY);
+
+    if (distance < 100) {
+        const cardRect = card.getBoundingClientRect();
+
+        const maxX = cardRect.width - btnRect.width;
+        const maxY = cardRect.height - btnRect.height;
+
+        const newX = Math.random() * maxX;
+        const newY = Math.random() * maxY;
+
+        scale -= 0.005;
+        if (scale <= 0.2) {
+            noBtn.style.display = "none";
+            return;
+        }
+
+        noBtn.style.left = `${newX}px`;
+        noBtn.style.top = `${newY}px`;
+        noBtn.style.transform = `scale(${scale})`;
+    }
+}
+
+// Desktop mouse
+document.addEventListener("mousemove", (e) => {
+    if (noBtn.style.display !== "none") {
+        escape(e.clientX, e.clientY);
+    }
+});
+
+// Mobile touch
+document.addEventListener("touchmove", (e) => {
+    if (noBtn.style.display !== "none") {
+        const touch = e.touches[0];
+        escape(touch.clientX, touch.clientY);
+    }
+});
+
+// YES button
+document.getElementById("yesBtn").addEventListener("click", () => {
+    document.body.innerHTML = `
+        <div style="
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            height:100vh;
+            background:linear-gradient(135deg,#ff758c,#ff7eb3);
+            color:white;
+            font-size:30px;
+            text-align:center;
+            padding:20px;">
+            💖 YAY! I love you ba Make Trinity Chi Iphone 13 muli imwe Pro Max Chikala!!! 💖
+        </div>
+    `;
+});
+</script>
+
+</body>
+</html>
